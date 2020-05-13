@@ -18,9 +18,12 @@
 }
 
 html {
-    height: 100%;
+    height: 99.5%;
 }
 body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     height: 100%;
     margin: 0;
     background: linear-gradient(var(--background-color), var(--background-dark), var(--background-darker));
@@ -90,4 +93,11 @@ button{
     padding-top: 0;
     padding-bottom: 10px;
     color: var(--sub-text-color);
+}
+
+a{
+    color: var(--sub-text-color);
+    font-family: var(--sub-text-font);
+    font-size: 10px;
+    margin: 0 5px 0 auto;
 }
