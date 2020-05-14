@@ -86,10 +86,10 @@ button{
 
 .site-abbreviation{
     font-family: var(--maint-text-font);
+    height: 70px;
     font-size: 70px;
     text-align: center;
-    margin-top: 5px;
-    margin-bottom: -5px;
+    margin: 5px auto 5px auto;
 }
 
 .site-title{
@@ -105,4 +105,10 @@ button{
     font-family: var(--sub-text-font);
     font-size: 10px;
     margin: 0 5px 0 auto;
+}
+
+#add-cross{
+    font-size: 40px;
+    transform: rotate(45deg);
+    margin: 15px auto -5px -7px;
 }
