@@ -24,7 +24,7 @@ const hashMap = navigationObject || [
 const render = () =>{
     $sites.find("li:not(.add-button)").remove();
     hashMap.forEach((node, index) =>{
-        $(`
+        const $li = $(`
         <li class="site">
             <a href=${node.url}>
                 <div class="site-abbreviation">${node.abbreviation}</div>
@@ -34,7 +34,7 @@ const render = () =>{
         </li>
         `).insertBefore($lastLi)
 // adding the delete button function
-        $(".delete-button").on("click", ()=>{
+        $li.on("click", ".delete-button", ()=>{
             hashMap.splice(index, 1);
             render();
         })
