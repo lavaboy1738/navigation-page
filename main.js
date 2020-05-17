@@ -20,6 +20,7 @@ const hashMap = navigationObject || [
     }
 ]
 
+// render the entire list of buttons
 const render = () =>{
     $sites.find("li:not(.add-button)").remove();
     hashMap.forEach((node, index) =>{
@@ -29,13 +30,29 @@ const render = () =>{
                 <div class="site-abbreviation">${node.abbreviation}</div>
                 <div class="site-title">${node.domain}</div>
             </a>
+            <div class="delete-button">&#x2573;</div>
         </li>
         `).insertBefore($lastLi)
+// adding the delete button function
+        $(".delete-button").on("click", ()=>{
+            hashMap.splice(index, 1);
+            render();
+        })
     })
 }
 
-render();
+const changeColor = () =>{
+    const randomColorCode = () =>{
+        return Math.floor(Math.random()*256);
+    }
+    const r = randomColorCode();
+    const g = randomColorCode();
+    const b = randomColorCode();
 
+    document.documentElement.style.setProperty("--background-color", `rgb(${r}, ${g}, ${b})`);
+}
+
+// click add button to add new website
 $(".add-button").on("click", () => {
     let url = window.prompt("New Site URL:");
     let domain, abbreviation
@@ -56,7 +73,11 @@ $(".add-button").on("click", () => {
     render();
 })
 
+// saving the list of button in local storage
 window.onbeforeunload = () =>{
     const string  = JSON.stringify(hashMap)
     localStorage.setItem("navigation", string)
 }
+
+render();
+changeColor();

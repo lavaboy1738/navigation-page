@@ -13,8 +13,8 @@
     --maint-text-font: 'Raleway', sans-serif;
     --sub-text-font: 'Poppins', sans-serif;
     --background-color: #1db954;
-    --background-dark: 	#212121;
-    --background-darker: #121212;
+    --background-dark: 	#222222;
+    --background-darker: #000000;
 }
 
 html {
@@ -52,10 +52,6 @@ input{
     padding-left: 10px;
 }
 
-input:focus{
-    border-bottom: 2px solid white;
-}
-
 button{
     border: 1px solid white;
     background: none;
@@ -64,7 +60,7 @@ button{
     border-radius: 5px;
     width: 100px;
     cursor: pointer;
-    position: relative;
+    /* position: relative; */
     opacity: 0.7;
     transition: 0.3s all ease;
     overflow: hidden;
@@ -108,11 +104,11 @@ button:hover{
     margin-bottom: 20px;
     width: 120px;
     transition: 0.3s all ease;
+    position: relative;
 }
 
 .site:hover{
     background-color: rgba(255, 255, 255, 0.4);
-    transform: scale(1.05);
     transition-delay: 0.1s;
 }
 
@@ -148,6 +144,15 @@ button:hover{
 .add-button{
     cursor: pointer;
 }
+
+.delete-button{
+    cursor: default;
+    font-size: 12px;
+    position: absolute;
+    top: 3px;
+    right: 5px;
+}
+
 
 /* for iphone 7,8,10 and up  */
 @media(min-width:375px){
@@ -193,6 +198,16 @@ button:hover{
         margin-left: auto;
         margin-right: auto;
         max-width: 600px;
+    }
+
+    .delete-button{
+        opacity: 0;
+        transition: 0.3s all ease;
+    }
+
+    .site:hover .delete-button{
+        opacity: 1;
+        transition-delay: 0.1s;
     }
 
     .footer{
