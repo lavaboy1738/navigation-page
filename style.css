@@ -64,18 +64,21 @@ button{
     border-radius: 5px;
 }
 
+.sites{
+    margin:30px;
+}
+
 .sites-wrapper{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin: 30px;
 }
 
 .site{
     border: 1px solid white;
     border-radius: 10px;
-    margin-bottom: 20px;
-    min-width: 140px;
+    margin-bottom: 30px;
+    min-width: 120px;
     transition: 0.3s all ease;
 }
 
@@ -86,8 +89,8 @@ button{
 
 .site-abbreviation{
     font-family: var(--maint-text-font);
-    height: 70px;
-    font-size: 70px;
+    height: 50px;
+    font-size: 50px;
     text-align: center;
     margin: 5px auto 5px auto;
 }
@@ -95,7 +98,7 @@ button{
 .site-title{
     font-family: var(--sub-text-font);
     text-align: center;
-    font-size: 14px;
+    font-size: 12px;
     margin-bottom: 8px;
     color: var(--sub-text-color);
 }
@@ -108,7 +111,44 @@ button{
 }
 
 #add-cross{
-    font-size: 40px;
+    font-size: 30px;
     transform: rotate(45deg);
-    margin: 15px auto -5px -7px;
+    margin: 10px auto 0px -2px;
 }
+
+.add-button{
+    cursor: pointer;
+}
+
+@media(min-width:375px){
+    .site{
+        min-width: 150px;
+    }
+}
+
+@media (min-width: 768px){
+    .sites{
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .sites-wrapper{
+        margin-right: -25px;
+        justify-content: flex-start;
+    }
+
+    .site{
+        min-width: 100px;
+        margin-right: 25px;
+    }
+
+    .input-form{
+        margin-top: 30vh;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 600px;
+    }
+
+}
+
