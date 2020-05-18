@@ -81,9 +81,11 @@ $(".add-button").on("click", () => {
         const cutOff= url.slice(4);
         abbreviation = cutOff[0].toUpperCase();
         domain = abbreviation + cutOff.slice(1, cutOff.indexOf("."));
+        url = "https://" + url;
     }else{
         abbreviation = url[0].toUpperCase();
         domain = abbreviation + url.slice(1, url.indexOf("."));
+        url = "https://" + url;
     }
     hashMap.push({
         abbreviation,
