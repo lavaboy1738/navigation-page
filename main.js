@@ -55,11 +55,17 @@ const changeColor = () =>{
 // click add button to add new website
 $(".add-button").on("click", () => {
     let url = window.prompt("New Site URL:");
-    let domain, abbreviation
+    let domain, abbreviation, cutOff
     if (url.indexOf("http") !== 0) {
-        abbreviation = url[0].toUpperCase()
-        domain = abbreviation + url.slice(1, url.indexOf("."));
-        url = "https://" + url;
+        if(url.indexOf("www.")!==0){
+            abbreviation = url[0].toUpperCase()
+            domain = abbreviation + url.slice(1, url.indexOf("."));
+            url = "https://" + url;
+        }else{
+            cutOff = url.slice(4);
+            abbreviation =cutOff[0].toUpperCase();
+            domain = abbreviation + cutOff.slice(1, cutOff.indexOf("."))
+        }
     }else{
         abbreviation = url[12].toUpperCase();
         const partialDomain = url.slice(12)
