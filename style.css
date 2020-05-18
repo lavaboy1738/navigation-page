@@ -236,6 +236,7 @@ button:hover {
     width: 120px;
     transition: 0.3s all ease;
     position: relative;
+    opacity: 1;
 }
 
 .site:hover {
@@ -373,6 +374,11 @@ input:valid+.underline>span {
     .delete-button {
         opacity: 0;
         transition: 0.3s all ease;
+    }
+
+    .deleted{
+        transition: 0.7s all ease;
+        opacity: 0;
     }
 
     .site:hover .delete-button {

@@ -34,9 +34,10 @@ const render = () =>{
         </li>
         `).insertBefore($lastLi)
 // adding the delete button function
-        $li.on("click", ".delete-button", ()=>{
+        $li.on("click", ".delete-button", (e)=>{
+            e.target.parentElement.classList.add("deleted");
             hashMap.splice(index, 1);
-            render();
+            setTimeout(render, 800)
         })
     })
 }
@@ -55,21 +56,34 @@ const changeColor = () =>{
 // click add button to add new website
 $(".add-button").on("click", () => {
     let url = window.prompt("New Site URL:");
-    let domain, abbreviation, cutOff
-    if (url.indexOf("http") !== 0) {
-        if(url.indexOf("www.")!==0){
-            abbreviation = url[0].toUpperCase()
-            domain = abbreviation + url.slice(1, url.indexOf("."));
-            url = "https://" + url;
+    let domain, abbreviation
+    if(url.indexOf("https://") === 0){
+        const cutOff = url.slice(8);
+        if(cutOff.indexOf("www.") ===0){
+            const cutOff2 = cutOff.slice(4);
+            abbreviation = cutOff2[0].toUpperCase();
+            domain = abbreviation + cutOff2.slice(1, cutOff2.indexOf("."));
         }else{
-            cutOff = url.slice(4);
-            abbreviation =cutOff[0].toUpperCase();
-            domain = abbreviation + cutOff.slice(1, cutOff.indexOf("."))
+            abbreviation = cutOff[0].toUpperCase();
+            domain = abbreviation + cutOff.slice(1, cutOff.indexOf("."));
         }
+    }else if(url.indexOf("http://") ===0){
+        const cutOff = url.slice(7);
+        if(cutOff.indexOf("www.") ===0){
+            const cutOff2 = cutOff.slice(4);
+            abbreviation = cutOff2[0].toUpperCase();
+            domain = abbreviation + cutOff2.slice(1, cutOff2.indexOf("."));
+        }else{
+            abbreviation = cutOff[0].toUpperCase();
+            domain = abbreviation + cutOff.slice(1, cutOff.indexOf("."));
+        }
+    }else if(url.indexOf("www.") === 0){
+        const cutOff= url.slice(4);
+        abbreviation = cutOff[0].toUpperCase();
+        domain = abbreviation + cutOff.slice(1, cutOff.indexOf("."));
     }else{
-        abbreviation = url[12].toUpperCase();
-        const partialDomain = url.slice(12)
-        domain = abbreviation + partialDomain.slice(1,partialDomain.indexOf("."));
+        abbreviation = url[0].toUpperCase();
+        domain = abbreviation + url.slice(1, url.indexOf("."));
     }
     hashMap.push({
         abbreviation,
