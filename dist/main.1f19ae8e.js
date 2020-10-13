@@ -118,10 +118,104 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"main.js":[function(require,module,exports) {
+var $sites = $(".sites");
+var $lastLi = $sites.find(".add-button");
+var navigation = localStorage.getItem("navigation");
+var navigationObject = JSON.parse(navigation);
+var hashMap = navigationObject || [{
+  abbreviation: "Y",
+  url: "https://www.youtube.com",
+  domain: "Youtube"
+}, {
+  abbreviation: "A",
+  url: "https://www.amazon.ca",
+  domain: "Amazon"
+}, {
+  abbreviation: "F",
+  url: "https://www.facebook.com",
+  domain: "Facebook"
+}]; // render the entire list of buttons
+
+var render = function render() {
+  $sites.find("li:not(.add-button)").remove();
+  hashMap.forEach(function (node, index) {
+    var $li = $("\n        <li class=\"site\">\n            <a href=".concat(node.url, ">\n                <div class=\"site-abbreviation\">").concat(node.abbreviation, "</div>\n                <div class=\"site-title\">").concat(node.domain, "</div>\n            </a>\n            <div class=\"delete-button\">&#x2573;</div>\n        </li>\n        ")).insertBefore($lastLi); // adding the delete button function
+
+    $li.on("click", ".delete-button", function (e) {
+      e.target.parentElement.classList.add("deleted");
+      hashMap.splice(index, 1);
+      setTimeout(render, 800);
+    });
+  });
+};
+
+var changeColor = function changeColor() {
+  var randomColorCode = function randomColorCode() {
+    return Math.floor(Math.random() * 256);
+  };
+
+  var r = randomColorCode();
+  var g = randomColorCode();
+  var b = randomColorCode();
+  document.documentElement.style.setProperty("--background-color", "rgb(".concat(r, ", ").concat(g, ", ").concat(b, ")"));
+}; // click add button to add new website
+
+
 $(".add-button").on("click", function () {
-  window.prompt("New Site URL:");
-});
-},{}],"../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+  var url = window.prompt("New Site URL:");
+  var domain, abbreviation;
+
+  if (url.indexOf("https://") === 0) {
+    var cutOff = url.slice(8);
+
+    if (cutOff.indexOf("www.") === 0) {
+      var cutOff2 = cutOff.slice(4);
+      abbreviation = cutOff2[0].toUpperCase();
+      domain = abbreviation + cutOff2.slice(1, cutOff2.indexOf("."));
+    } else {
+      abbreviation = cutOff[0].toUpperCase();
+      domain = abbreviation + cutOff.slice(1, cutOff.indexOf("."));
+    }
+  } else if (url.indexOf("http://") === 0) {
+    var _cutOff = url.slice(7);
+
+    if (_cutOff.indexOf("www.") === 0) {
+      var _cutOff2 = _cutOff.slice(4);
+
+      abbreviation = _cutOff2[0].toUpperCase();
+      domain = abbreviation + _cutOff2.slice(1, _cutOff2.indexOf("."));
+    } else {
+      abbreviation = _cutOff[0].toUpperCase();
+      domain = abbreviation + _cutOff.slice(1, _cutOff.indexOf("."));
+    }
+  } else if (url.indexOf("www.") === 0) {
+    var _cutOff3 = url.slice(4);
+
+    abbreviation = _cutOff3[0].toUpperCase();
+    domain = abbreviation + _cutOff3.slice(1, _cutOff3.indexOf("."));
+    url = "https://" + url;
+  } else {
+    abbreviation = url[0].toUpperCase();
+    domain = abbreviation + url.slice(1, url.indexOf("."));
+    url = "https://" + url;
+  }
+
+  hashMap.push({
+    abbreviation: abbreviation,
+    url: url,
+    domain: domain
+  });
+  render();
+}); // saving the list of button in local storage
+
+window.onbeforeunload = function () {
+  var string = JSON.stringify(hashMap);
+  localStorage.setItem("navigation", string);
+};
+
+render();
+changeColor();
+},{}],"../../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -149,7 +243,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54730" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50121" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -325,5 +419,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../.config/yarn/global/node_modules/parcel/src/builtins/hmr-runtime.js","main.js"], null)
+},{}]},{},["../../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","main.js"], null)
 //# sourceMappingURL=/main.1f19ae8e.js.map
